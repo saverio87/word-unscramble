@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Unscramble</title>
+    <link rel="stylesheet" href="game.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Fullscreen message overlay -->
+    <div id="overlay" class="fullscreen-message">
+        <div class="message-content">
+            <h2>Please Enter Full Screen</h2>
+            <p>This game is designed to be used in full screen mode for the best experience.</p>
+            <button id="fullscreen-btn" class="fullscreen-button">Enter Full Screen</button>
+        </div>
+    </div>
+
+    <div class="game-background">
+        <div class="app-container">
+            <main class="game-main">
+                <div id="gameContainer" class="game-screen">
+                    <div class="definition-container">
+                        <div id="definitionRow" class="definition-text"></div>
+                    </div>
+
+                    <div class="word-container">
+                        <div id="topRow" class="letter-row top-row"></div>
+                        <div id="bottomRow" class="letter-row bottom-row"></div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="nav-button" id="prevArrow">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <span class="word-indicator" id="wordIndicator">Word 1 of 10</span>
+                        <button class="nav-button" id="nextArrow">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="endScreen" class="end-screen hidden">
+                    <div class="end-content">
+                        <h1>Congratulations!</h1>
+                        <p>You unscrambled all the words:</p>
+                        <div class="completed-words"></div>
+                        <button class="game-button primary" onclick="location.reload()">Play Again</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="game.js" type="module"></script>
+</body>
+
+</html>

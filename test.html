@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Unscramble Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .box {
+            margin: 5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            background-color: #fff;
+            border: 2px solid #aaa;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .box.correct {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .box.wrong {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .box.hidden {
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        .arrow {
+            margin: 0 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .arrow.disabled {
+            color: #ccc;
+            pointer-events: none;
+        }
+
+        .word-indicator {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Word Unscramble Game</h1>
+    <div class="game-container">
+        <div class="container" id="topContainer"></div>
+        <div class="container" id="bottomContainer"></div>
+        <div class="navigation">
+            <span class="arrow" id="prevArrow">&lt;</span>
+            <span class="word-indicator" id="wordIndicator">Word 1 of 10</span>
+            <span class="arrow" id="nextArrow">&gt;</span>
+        </div>
+    </div>
+
+    <script>
+        const words = [
+            "starbucks", "javascript", "education", "programming", "developer",
+            "challenge", "learning", "computer", "algorithm", "function"
+        ];
+        let currentWordIndex = 0;
+
+        // Initial game state for each word
+        let gameState = words.map(word => {
+            const scrambled = word.split("").sort(() => Math.random() - 0.5); // Scramble the letters
+            return {
+                word,                           // Original word
+                scrambled: scrambled.join(""),  // Scrambled version for reference (optional)
+                topRow: Array(word.length).fill(""), // Progress in the top row
+                bottomRow: scrambled            // Scrambled letters for the bottom row
+            };
+        });
+
+        const topContainer = document.getElementById("topContainer");
+        const bottomContainer = document.getElementById("bottomContainer");
+        const prevArrow = document.getElementById("prevArrow");
+        const nextArrow = document.getElementById("nextArrow");
+        const wordIndicator = document.getElementById("wordIndicator");
+
+        const renderWord = (index) => {
+            const state = gameState[index];
+
+            // Clear previous tiles
+            topContainer.innerHTML = "";
+            bottomContainer.innerHTML = "";
+
+            // Render top row (progress tiles)
+            state.topRow.forEach((char, i) => {
+                const box = document.createElement("div");
+                box.classList.add("box");
+                box.textContent = char;
+                topContainer.appendChild(box);
+            });
+
+            // Render bottom row (remaining tiles)
+            state.bottomRow.forEach((char, i) => {
+                const box = document.createElement("div");
+                box.classList.add("box");
+                box.textContent = char;
+
+
+                // Add click event listener for each box / tile
+                box.addEventListener("click", () => {
+                    const nextEmptyIndex = state.topRow.findIndex(c => c === "");
+                    console.log('next empty index is ', nextEmptyIndex)
+                    if (nextEmptyIndex !== -1) {
+                        if (char === state.word[nextEmptyIndex]) {
+                            // If letter picked is the same as letter that should be in the
+                            // next empty box, do this
+                            state.topRow[nextEmptyIndex] = char;
+                            state.bottomRow.splice(i, 1); // Remove the letter from the bottom row
+
+                            // Recursive function - Re-render the word
+                            renderWord(index); // 
+                        } else {
+                            // Wrong letter
+                            box.classList.add("wrong");
+                            setTimeout(() => box.classList.remove("wrong"), 500);
+                        }
+
+                        // Check if word is complete
+                        if (state.topRow.join("") === state.word) {
+                            setTimeout(() => alert("Word completed!"), 500);
+                        }
+                    }
+                });
+
+                // After eventListener is added, add box to bottom row
+                bottomContainer.appendChild(box);
+            });
+
+            // Update navigation arrows and word indicator
+            prevArrow.classList.toggle("disabled", index === 0);
+            nextArrow.classList.toggle("disabled", index === words.length - 1);
+            wordIndicator.textContent = `Word ${index + 1} of ${words.length}`;
+        };
+
+        // Add navigation functionality
+        prevArrow.addEventListener("click", () => {
+            if (currentWordIndex > 0) {
+                currentWordIndex--;
+                renderWord(currentWordIndex);
+            }
+        });
+
+        nextArrow.addEventListener("click", () => {
+            if (currentWordIndex < words.length - 1) {
+                currentWordIndex++;
+                renderWord(currentWordIndex);
+            }
+        });
+
+        // Initial render
+        renderWord(currentWordIndex);
+    </script>
+</body>
+
+</html>

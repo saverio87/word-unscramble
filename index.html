@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Unscramble</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="game-background">
+        <div class="app-container">
+            <header class="game-header">
+                <div class="game-logo">
+                    <h1>Word Unscramble</h1>
+                    <div class="tagline">Create your own word puzzles</div>
+                </div>
+            </header>
+
+            <main class="game-main">
+                <div class="game-screen">
+                    <div class="content-container">
+                        <!-- Left Section -->
+                        <div class="left-section">
+                            <h2 class="section-title">Enter Your Words</h2>
+                            <div class="form-container">
+                                <div class="wordList"></div>
+                            </div>
+                            <div class="submit-button">
+                                <button class="game-button primary" id="submitWords" type="button"
+                                    onclick="submitWords()">
+                                    <span>Start Game</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Section -->
+                        <div class="right-section">
+                            <h2 class="section-title">Quick Start</h2>
+                            <p class="section-subtitle">Try our pre-made word lists</p>
+                            <p class="section-description">Jump right into the game with these examples!</p>
+                            <div class="pre-made-buttons">
+                                <button class="game-button" type="button" onclick="submitSampleWords('negatives')">
+                                    <span>Negative Words</span>
+                                    <span class="button-label">(un-, in-, dis-, etc.)</span>
+                                </button>
+                                <button class="game-button" type="button" onclick="submitSampleWords('ation')">
+                                    <span>-ation Words</span>
+                                    <span class="button-label">(information, education, etc.)</span>
+                                </button>
+                                <button class="game-button" type="button" onclick="submitSampleWords('ous')">
+                                    <span>-ous Words</span>
+                                    <span class="button-label">(dangerous, famous, etc.)</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer removed -->
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
