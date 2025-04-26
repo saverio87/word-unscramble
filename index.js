@@ -77,9 +77,9 @@ function submitSampleWords(arr) {
 
 
 const createForm = () => {
-    const formContainer = document.querySelector('.wordList');
+    const wordList = document.querySelector('.wordList');
     for (let i = 0; i < 10; i++) {
-        formContainer.innerHTML += `
+        wordList.innerHTML += `
         <input type="text" placeholder="Word ${i + 1}" class="word">
         <input type="text" placeholder="Definition ${i + 1}" class="definition">
     `;
