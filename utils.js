@@ -83,7 +83,7 @@ export async function moveLetterBox(letterClicked, sourceRect, targetRect) {
         void floatingLetter.offsetWidth;
 
         // Add transition for smooth movement
-        floatingLetter.style.transition = "all 0.5s ease-in-out";
+        floatingLetter.style.transition = "all 0.3s ease-in-out";
 
         // Move to target position
         floatingLetter.style.left = `${targetRect.left}px`;

@@ -3,12 +3,12 @@ const negatives = [
     { word: 'illegible', definition: 'Not clear enough to be read; unreadable.' },
     { word: 'immature', definition: 'Not fully developed; having or showing emotional or intellectual development appropriate to someone younger.' },
     { word: 'immortal', definition: 'Living forever; never dying or decaying.' },
-    { word: 'impossible', definition: 'Not able to occur, exist, or be done.' },
-    { word: 'impatient', definition: 'Having or showing a tendency to be quickly irritated or provoked.' },
-    { word: 'imperfect', definition: 'Not perfect; having faults or errors.' },
-    { word: 'irregular', definition: 'Not even or balanced in shape or arrangement; not following a pattern.' },
-    { word: 'irrelevant', definition: 'Not connected with or relevant to something.' },
-    { word: 'irresponsible', definition: 'Not showing a proper sense of responsibility.' }
+    // { word: 'impossible', definition: 'Not able to occur, exist, or be done.' },
+    // { word: 'impatient', definition: 'Having or showing a tendency to be quickly irritated or provoked.' },
+    // { word: 'imperfect', definition: 'Not perfect; having faults or errors.' },
+    // { word: 'irregular', definition: 'Not even or balanced in shape or arrangement; not following a pattern.' },
+    // { word: 'irrelevant', definition: 'Not connected with or relevant to something.' },
+    // { word: 'irresponsible', definition: 'Not showing a proper sense of responsibility.' }
 ];
 
 const ationWords = [

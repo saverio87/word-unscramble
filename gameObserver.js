@@ -111,9 +111,79 @@ export class GameObserver {
     // Re-rendering
 
     switchToEndScreen(words) {
+        // Hide the game container
         this.gameContainer.classList.add("hidden");
+
+        // Show and position the end screen
         this.endScreen.classList.remove("hidden");
-        this.displayCompletionScreen(words);
+        this.endScreen.style.display = "flex";
+        this.endScreen.style.flexDirection = "column";
+        this.endScreen.style.alignItems = "center";
+        this.endScreen.style.width = "100%";
+        this.endScreen.style.padding = '2rem';
+        // this.endScreen.style.maxWidth = "800px"; // Optional: limit maximum width
+        this.endScreen.style.margin = "0 auto";  // Center horizontally
+
+        // Render the end screen content
+        this.renderEndScreen(words);
+
+        // this.gameContainer.classList.add("hidden");
+        // this.endScreen.classList.remove("hidden");
+        // this.displayCompletionScreen(words);
+    }
+
+    // Replace the existing renderEndScreen method with this updated version
+    renderEndScreen(words) {
+        // Create a container for all words
+        const wordsContainer = document.createElement("div");
+        wordsContainer.classList.add("end-screen-words-container");
+        wordsContainer.style.display = "flex";
+        wordsContainer.style.flexDirection = "column";
+        wordsContainer.style.gap = "1rem";
+        wordsContainer.style.marginTop = "2rem"; // Add space below the white container
+
+        // For each word, create a horizontal row of letters
+        words.forEach((word, wordIndex) => {
+            // Create a container for this word
+            const wordContainer = document.createElement("div");
+            wordContainer.classList.add("end-screen-word-container");
+            wordContainer.style.display = "flex";
+            wordContainer.style.flexDirection = "row"; // Horizontal arrangement of letters
+            wordContainer.style.justifyContent = "center";
+            wordContainer.style.gap = "0.5rem";
+
+            // Add a word label (optional)
+            const wordLabel = document.createElement("div");
+            wordLabel.classList.add("word-label");
+            wordLabel.textContent = `Word ${wordIndex + 1}:`;
+            wordLabel.style.marginRight = "1rem";
+            wordLabel.style.alignSelf = "center";
+            wordContainer.appendChild(wordLabel);
+
+            // Populate the word with letters in a horizontal row
+            word.split("").forEach(letter => {
+                const box = document.createElement("div");
+                box.classList.add("box", "normal", "correct"); // Add classes
+                box.textContent = letter; // Set the letter
+                wordContainer.appendChild(box); // Add the box to the word container
+            });
+
+            // Add this word container to the main words container
+            wordsContainer.appendChild(wordContainer);
+        });
+
+        // Clear any existing content and append the words container
+        this.endScreen.innerHTML = "";
+
+        // Add a heading for the end screen
+        const heading = document.createElement("h2");
+        heading.textContent = "Congratulations! You completed all words:";
+        heading.style.textAlign = "center";
+        heading.style.marginBottom = "1.5rem";
+        this.endScreen.appendChild(heading);
+
+        // Append the words container to the end screen
+        this.endScreen.appendChild(wordsContainer);
     }
 
     displayCompletionScreen(words) {
