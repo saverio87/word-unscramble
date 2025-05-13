@@ -55,7 +55,7 @@ const submitWords = () => {
         arr.push(obj)
     })
     localStorage.setItem('words', JSON.stringify(arr));
-    window.location.href = "game2.html";
+    window.location.href = "game.html";
 };
 
 
